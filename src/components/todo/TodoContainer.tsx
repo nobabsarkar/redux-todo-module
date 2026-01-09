@@ -1,16 +1,27 @@
-import { Button } from "../ui/button";
 import AddTodoModal from "./AddTodoModal";
 import TodoCard from "./TodoCard";
 import TodoFilter from "./TodoFilter";
+import { useGetTodosQuery } from "@/redux/api/api";
 
 const TodoContainer = () => {
+  // from local state
+  // const { todos } = useAppSelector((state) => state.todos);
+
+  // from server
+  const { data: todos, isLoading } = useGetTodosQuery(undefined);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div>
       <div className="flex justify-between mb-3">
         <AddTodoModal />
-        <Button className="bg-primary-gradient text-xl font-semibold">
+        {/* <Button className="bg-primary-gradient text-xl font-semibold">
           Filter
-        </Button>
+        </Button> */}
+
         <TodoFilter />
       </div>
       <div className="bg-primary-gradient w-full h-full rounded-xl p-[5px]">
@@ -18,10 +29,13 @@ const TodoContainer = () => {
           <p>There is no task pending</p>
         </div> */}
         <div className="bg-white p-5 w-full h-full rounded-lg space-y-3 ">
+          {todos?.data?.map((item) => (
+            <TodoCard {...item} />
+          ))}
+
+          {/* <TodoCard />
           <TodoCard />
-          <TodoCard />
-          <TodoCard />
-          <TodoCard />
+          <TodoCard /> */}
         </div>
       </div>
     </div>
