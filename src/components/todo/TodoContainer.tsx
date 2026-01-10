@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AddTodoModal from "./AddTodoModal";
 import TodoCard from "./TodoCard";
 import TodoFilter from "./TodoFilter";
@@ -29,13 +30,9 @@ const TodoContainer = () => {
           <p>There is no task pending</p>
         </div> */}
         <div className="bg-white p-5 w-full h-full rounded-lg space-y-3 ">
-          {todos?.data?.map((item) => (
+          {todos?.data?.map((item: any) => (
             <TodoCard {...item} />
           ))}
-
-          {/* <TodoCard />
-          <TodoCard />
-          <TodoCard /> */}
         </div>
       </div>
     </div>

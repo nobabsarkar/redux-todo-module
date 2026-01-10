@@ -1,18 +1,22 @@
-import { Button } from "@/components/ui/button";
+"use client";
+import { useState } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
 
 const TodoFilter = () => {
-  // const [position, setPosition] = useState("bottom");
+  const [position, setPosition] = useState("bottom");
 
   return (
     <>
-      <Dialog>
+      {/* <Dialog>
         <form>
           <DialogTrigger asChild>
             <Button className="bg-primary-gradient text-xl font-semibold cursor-pointer">
@@ -25,18 +29,6 @@ const TodoFilter = () => {
             </DialogHeader>
 
             <div className="grid gap-4">
-              {/* <div className="grid gap-3">
-                <Label htmlFor="name-1">Name</Label>
-                <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
-              </div> */}
-              {/* <div className="grid gap-3">
-                <Label htmlFor="username-1">Username</Label>
-                <Input
-                  id="username-1"
-                  name="username"
-                  defaultValue="@peduarte"
-                />
-              </div> */}
               <div className="flex items-center space-x-1">
                 <input value="top" type="checkbox" />
                 <h1>High</h1>
@@ -52,7 +44,22 @@ const TodoFilter = () => {
             </div>
           </DialogContent>
         </form>
-      </Dialog>
+      </Dialog> */}
+
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline">Open</Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56">
+          <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+            <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+          </DropdownMenuRadioGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </>
   );
 };

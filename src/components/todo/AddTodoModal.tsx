@@ -9,27 +9,51 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useAddTodoMutation } from "@/redux/api/api";
 import { addTodo } from "@/redux/features/todoSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { FormEvent, useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 const AddTodoModal = () => {
   const [task, setTask] = useState("");
   const [description, setDescription] = useState("");
-  const dispatch = useAppDispatch();
+  const [priority, setPriority] = useState("");
+
+  // For Local State management
+  // const dispatch = useAppDispatch();
+
+  // For server
+  const [addTodo, { data, isLoading, isError, isSuccess }] =
+    useAddTodoMutation();
+
+  console.log({ data, isLoading, isSuccess, isError });
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const randomString = Math.random().toString(36).substring(2, 7);
+    // const randomString = Math.random().toString(36).substring(2, 7);
 
     const taskDetails = {
-      id: randomString,
+      // id: randomString,
       title: task,
-      description: description,
+      isCompleted: false,
+      description,
+      priority,
     };
 
-    dispatch(addTodo(taskDetails));
+    console.log("inside modal", taskDetails);
+
+    // For Server
+    addTodo(taskDetails);
+
+    // dispatch(addTodo(taskDetails));
   };
 
   return (
@@ -63,6 +87,19 @@ const AddTodoModal = () => {
                 id="description"
                 name="text-right"
               />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="description">Priority</Label>
+              <Select onValueChange={(value) => setPriority(value)}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Priority" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="high">High</SelectItem>
+                  <SelectItem value="medium">Medium</SelectItem>
+                  <SelectItem value="low">Low</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
