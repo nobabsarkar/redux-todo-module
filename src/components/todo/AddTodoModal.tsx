@@ -33,8 +33,6 @@ const AddTodoModal = () => {
   const [addTodo, { data, isLoading, isError, isSuccess }] =
     useAddTodoMutation();
 
-  console.log({ data, isLoading, isSuccess, isError });
-
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
@@ -47,8 +45,6 @@ const AddTodoModal = () => {
       description,
       priority,
     };
-
-    console.log("inside modal", taskDetails);
 
     // For Server
     addTodo(taskDetails);
