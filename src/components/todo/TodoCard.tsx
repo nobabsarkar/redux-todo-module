@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/redux/hook";
 import { Button } from "../ui/button";
-import { removeTodo, toggleComplete } from "@/redux/features/todoSlice";
+import { removeTodo } from "@/redux/features/todoSlice";
 import { useUpdateTodoMutation } from "@/redux/api/api";
 
 type TTodoCardProps = {
