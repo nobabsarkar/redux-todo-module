@@ -20,9 +20,6 @@ const TodoContainer = () => {
       <div className="flex justify-between mb-3">
         <AddTodoModal />
         <TodoFilter />
-        {/* <Button className="bg-primary-gradient text-xl font-semibold">
-          Filter
-        </Button> */}
       </div>
       <div className="bg-primary-gradient w-full h-full rounded-xl p-[5px]">
         {/* <div className="bg-white text-2xl font-bold p-5 flex justify-center items-center rounded-md">
